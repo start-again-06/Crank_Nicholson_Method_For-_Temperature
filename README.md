@@ -24,9 +24,9 @@ The simulation models heat conduction along a one-dimensional rod using the Cran
 
 The heat conduction in the rod is modeled by the one-dimensional heat equation:
 
-\[
+$$
 \frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T}{\partial x^2}
-\]
+$$
 
 Where:  
 - \(T\) is the temperature (°C)  
@@ -61,9 +61,11 @@ This provides a starting point for the simulation, allowing the system to evolve
 ### Stability Considerations
 Although the Crank-Nicolson method is unconditionally stable for linear problems, the stability parameter is monitored:
 
+$$
 \[
 s = \frac{\alpha \cdot dt}{dx^2} \leq 0.5
 \]
+$$
 
 This ensures numerical accuracy and prevents oscillations in the temperature profile. Users can adjust `dx` and `dt` to refine spatial and temporal resolution while maintaining stability.
 
