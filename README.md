@@ -1,85 +1,81 @@
 # Crank_Nicholson_Method_For_Temperature
 
-# 🔥 Heat Conduction Simulation using Crank-Nicolson Method
+## Heat Conduction Simulation using Crank-Nicolson Method
+This repository contains a Python implementation of the Crank-Nicolson method to solve the 1D heat conduction equation using finite difference methods. The simulation models heat distribution in a rod over time, helping visualize how heat propagates under given boundary and initial conditions.
 
-This repository contains a Python implementation of the Crank-Nicolson method to solve the 1D heat conduction equation using finite difference methods. The simulation models heat distribution in a rod over time.
+## Table of Contents
+- [Introduction](#introduction)  
+- [Requirements](#requirements)  
+- [Installation](#installation)  
+- [Usage](#usage)  
+- [Simulation Details](#simulation-details)  
+- [Visualization](#visualization)  
+- [Directory Structure](#directory-structure)  
+- [License](#license)  
+- [Summary](#summary)  
 
----
+## Introduction
+The Crank-Nicolson method is a powerful numerical technique used to solve parabolic partial differential equations, such as the heat equation. This implementation models the temperature distribution in a rod of length L = 10 meters, with boundary conditions applied at the base and tip, and a uniform initial temperature.
 
-## 📌 Table of Contents
-- [Introduction](#introduction)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Simulation Details](#simulation-details)
-- [Visualization](#visualization)
-- [Directory Structure](#directory-structure)
-- [License](#license)
+## System Design and Boundary Conditions
 
----
+### System Overview
+The simulation models heat conduction along a one-dimensional rod using the Crank-Nicolson method, a numerical technique that combines the implicit and explicit finite difference schemes. The system iteratively computes temperature values at discrete spatial points along the rod over a series of time steps, producing a stable and accurate solution to the heat equation:
 
-## 📖 Introduction
+\[
+\frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T}{\partial x^2}
+\]
 
-The Crank-Nicolson method is a powerful numerical technique used to solve parabolic partial differential equations, such as the heat equation. This implementation models the temperature distribution in a rod of length **L = 10 meters**, given boundary conditions at the base and tip.
+Where:
+- \(T\) is temperature (°C)  
+- \(t\) is time (s)  
+- \(x\) is spatial position along the rod (m)  
+- \(\alpha\) is the thermal diffusivity (m²/s)  
 
----
+The Crank-Nicolson method provides a second-order accurate solution in both space and time while remaining unconditionally stable for linear problems.
 
-## 🛠 Requirements
+### Spatial and Temporal Discretization
+- **Rod Length (L):** 10 meters  
+- **Number of Spatial Points (Nx):** 75  
+- **Number of Time Steps (Nt):** 1000  
+- **Spatial Step (dx):** L / (Nx - 1)  
+- **Time Step (dt):** 0.1 seconds  
 
-Make sure you have the following dependencies installed:
+The grid is uniformly spaced, and temperature values are computed at each node for every time step.
 
-```bash
-pip install numpy matplotlib scipy
-📥 Installation
-Clone this repository and navigate to the project directory:
-git clone https://github.com/your-username/heat-conduction-solver.git
-cd heat-conduction-solver
-🚀 Usage
-Run the script to simulate heat conduction and visualize the temperature distribution:
+### Boundary Conditions
+- **Base (x = 0):** Fixed temperature of 300°C (Dirichlet boundary condition)  
+- **Tip (x = L):** Fixed temperature of 50°C (Dirichlet boundary condition)  
 
-bash
-Copy
-Edit
-python heat_conduction.py
-📊 Simulation Details
-Rod Length: 10.0 meters
+These Dirichlet boundary conditions ensure that the temperature at both ends of the rod remains constant throughout the simulation.
 
-Thermal Diffusivity: 0.01 m²/s
+### Initial Condition
+- **Uniform Initial Temperature:** 30°C along the entire rod at t = 0  
 
-Boundary Conditions:
+This provides a starting point for the simulation, allowing the system to evolve temperature distribution over time according to the Crank-Nicolson scheme.
 
-Base temperature: 300°C
+### Stability Considerations
+Although the Crank-Nicolson method is unconditionally stable for linear problems, the stability parameter is monitored:
 
-Tip temperature: 50°C
+\[
+s = \frac{\alpha \cdot dt}{dx^2} \leq 0.5
+\]
 
-Initial Condition: Uniform 30°C throughout the rod
+This ensures numerical accuracy and prevents oscillations in the temperature profile. Users can adjust `dx` and `dt` to refine spatial and temporal resolution while maintaining stability.
 
-Grid:
+### System Workflow
+1. Discretize the rod into Nx spatial points.  
+2. Initialize temperature array with the uniform initial temperature.  
+3. Apply boundary conditions at the base and tip.  
+4. Iterate through Nt time steps using the Crank-Nicolson scheme.  
+5. Solve the tridiagonal system of linear equations at each time step.  
+6. Store temperature distributions in the `results/` folder for visualization.  
 
-Nx = 75 spatial points
+## Visualization
 
-Nt = 1000 time steps
+The simulation generates plots of the final temperature distribution along the rod. These visualizations illustrate how heat propagates over time using the Crank-Nicolson method.
 
-dx = L / (Nx - 1)
+## License
 
-dt = 0.1 seconds
-
-Stability Check: Ensures the numerical scheme remains stable (s ≤ 0.5)
-
-📈 Visualization
-The simulation plots the final temperature distribution in the rod. The results help understand how heat propagates over time using the Crank-Nicolson method.
-
-📂 Directory Structure
-
-├── heat_conduction.py         # Main script for heat simulation  
-├── requirements.txt           # Required dependencies  
-├── README.md                  # Project documentation  
-└── results/                   # Folder for generated plots  
-
-📜 License
-This project is licensed under the MIT License. Feel free to modify and use it for your work.
-
-If you want me to prepare any code files or add more sections, just say!
-
-
+This project is licensed under the MIT License. You are free to modify and use it for educational or research purposes.
 
