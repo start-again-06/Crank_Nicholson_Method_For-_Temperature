@@ -22,15 +22,19 @@ The Crank-Nicolson method is a powerful numerical technique used to solve parabo
 ### System Overview
 The simulation models heat conduction along a one-dimensional rod using the Crank-Nicolson method, a numerical technique that combines the implicit and explicit finite difference schemes. The system iteratively computes temperature values at discrete spatial points along the rod over a series of time steps, producing a stable and accurate solution to the heat equation:
 
+The heat conduction in the rod is modeled by the one-dimensional heat equation:
+
 \[
 \frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T}{\partial x^2}
 \]
 
-Where:
-- \(T\) is temperature (°C)  
+Where:  
+- \(T\) is the temperature (°C)  
 - \(t\) is time (s)  
-- \(x\) is spatial position along the rod (m)  
+- \(x\) is the spatial position along the rod (m)  
 - \(\alpha\) is the thermal diffusivity (m²/s)  
+
+This equation describes how heat propagates along the rod over time.
 
 The Crank-Nicolson method provides a second-order accurate solution in both space and time while remaining unconditionally stable for linear problems.
 
